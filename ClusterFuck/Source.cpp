@@ -8,11 +8,11 @@ public:
     Vector3(float, float, float);
     ~Vector3();
     Vector3(const Vector3&);
-    Vector3 operator=(Vector3);
-    Vector3 operator+(Vector3);
-    Vector3 operator-(Vector3&);
+    Vector3 operator=(const Vector3);
+    Vector3 operator+(const Vector3);
+    Vector3 operator-(const Vector3&);
     Vector3 operator*(const float);
-    Vector3 operator/(float&);
+    Vector3 operator/(const float&);
 
     friend std::ostream& operator<<(std::ostream&, Vector3&);
 
@@ -45,11 +45,14 @@ public:
 
 //Def Constructor
 Vector3::Vector3() {
-
+    
 }
 
 //Parameterized constructor
-Vector3::Vector3(float yes) : Vector3(yes, yes, yes) {
+Vector3::Vector3(float yes) /*: Vector3(yes, yes, yes)*/ {
+    this->x = yes;
+    this->y = yes;
+    this->z = yes;
 
 }
 
@@ -73,7 +76,7 @@ Vector3::~Vector3() {
 }
 
 //Assignment Overload
-Vector3 Vector3::operator=(Vector3 ass) {
+Vector3 Vector3::operator=(const Vector3 ass) {
     x = ass.x;
     y = ass.y;
     z = ass.z;
@@ -81,29 +84,24 @@ Vector3 Vector3::operator=(Vector3 ass) {
 }
 
 //Addition Overload
-Vector3 Vector3::operator+(Vector3 ass) {
-    x + ass.x;
-    y + ass.y;
-    z + ass.z;
-    return(ass);
+Vector3 Vector3::operator+(const Vector3 ass) {
+    return Vector3(x + ass.x, y + ass.y, z + ass.z);
 }
 
 //Subtraction Overload
-Vector3 Vector3::operator-(Vector3& ass) {
-    x - ass.x;
-    y - ass.y;
-    z - ass.z;
-    return(ass);
+Vector3 Vector3::operator-(const Vector3& ass) {
+    
+    return Vector3(x - ass.x, y - ass.y, z - ass.z);
 }
 
 //Multiplication Overload
 Vector3 Vector3::operator*(const float ass) {
-    return(x * ass, y * ass, z * ass);  
+    return Vector3(x * ass, y * ass, z * ass);  
 }
 
 //Division Overload
-Vector3 Vector3::operator/(float& ass) {
-    return(x / ass, y / ass, z / ass);
+Vector3 Vector3::operator/(const float& ass) {
+    return Vector3(x / ass, y / ass, z / ass);
 }
 
 //Insertion Overload
@@ -147,37 +145,39 @@ void Vector3::normal() {
 
 //Calculate particle position and velocity
 void Particle::calculate(float dt) {
-    std::cout << velocity.y << acceleration.y << dt;
+    std::cout << "velocity = " << velocity.y << " + " << acceleration.y << " * " << dt << "\n";
     velocity = velocity + acceleration * dt;
-    std::cout << position.y << velocity.y << dt;
+    std::cout << "position = " << position.y << " + " << velocity.y << " * " << dt << "\n";
     position = position + velocity * dt;
 }
 
 //print new y coordinate
 void printparticle(Particle p) {
-    std::cout << "\nPosition && Velocity:" << p.position.y << " " << p.velocity.y << std::endl;
+    std::cout << "\nPosition && Velocity: " << p.position.y << " " << p.velocity.y << std::endl;
 }
 
 //Main entry point
 void main() {
     Vector3 vector(5, 6, 7);
+    
     float f = vector.magnitude();
-    std::cout << "\nMagnitude:" << f << std::endl;
+    std::cout << "\nMagnitude: " << f << std::endl;
 
     Vector3 v = vector.invert(vector);
-    std::cout << "\nInvert:" << v << std::endl;
+    std::cout << "\nInvert: " << v << std::endl;
 
     vector.normal();
-    std::cout << "\nNormal:" << vector.x << " " << vector.y << " " << vector.z << std::endl;
+    std::cout << "\nNormal: " << vector.x << " " << vector.y << " " << vector.z << "\n" << std::endl;
 
     Particle p;
-    p.position = Vector3(0.0f, 0.0f, 0.0f);
-    p.velocity = Vector3(0.0f, 10.0f, 0.0f);
-    p.acceleration = Vector3(0.0f, -2.0f, 0.0f);
+    p.position = Vector3(0.f);
+    p.velocity = Vector3(0.f, 10.f, 0.f);
+    p.acceleration = Vector3(0.f, -2.f, 0.f);
 
-    //work in progress
+    //printing particle positions
     while (p.position.y >= 0) {
-        p.calculate(0.2f);
+        p.calculate(.2f);
         printparticle(p);
+        //if (p.position.y == 0) break;
     }
 }
