@@ -176,8 +176,8 @@ void main() {
 
     //printing particle positions
     while (p.position.y >= 0) {
-        p.calculate(.2f);
+        p.calculate(.1f);
         printparticle(p);
-        //if (p.position.y == 0) break;
+        //if (p.velocity.y <= 0) break;
     }
 }
