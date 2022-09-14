@@ -118,12 +118,14 @@ std::ostream& operator<<(std::ostream& out, Vector3& v1) {
 //    z *= ass;
 //}
 
+//Vector Magnitude
 float Vector3::magnitude() {
     float result;
     result = sqrt(x * x + y * y + z * z);
     return result;
 }
  
+//Invert the vector
 Vector3 Vector3::invert(Vector3& temp) {
     
     //return Vector3(x, y, z) * -1.0f;
@@ -133,6 +135,7 @@ Vector3 Vector3::invert(Vector3& temp) {
     return (temp);
 }
 
+//Normalize the vector
 void Vector3::normal() {
     float result = magnitude();
 
@@ -142,6 +145,7 @@ void Vector3::normal() {
 
 }
 
+//Calculate particle position and velocity
 void Particle::calculate(float dt) {
     std::cout << velocity.y << acceleration.y << dt;
     velocity = velocity + acceleration * dt;
@@ -149,10 +153,12 @@ void Particle::calculate(float dt) {
     position = position + velocity * dt;
 }
 
+//print new y coordinate
 void printparticle(Particle p) {
     std::cout << "\nPosition && Velocity:" << p.position.y << " " << p.velocity.y << std::endl;
 }
 
+//Main entry point
 void main() {
     Vector3 vector(5, 6, 7);
     float f = vector.magnitude();
