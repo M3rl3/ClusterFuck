@@ -9,8 +9,14 @@ public:
     Vector3 acceleration;
     Vector3 velocity;
 
-    void calculate(float);
+    Particle();
+    ~Particle();
+    float damping;
+    float mass;
 
+    void calculate(float);
+    void print0(float);
+    void print1();
     friend std::ostream& operator<<(std::ostream& out, Particle& p1) {
         out << p1.position << p1.velocity;
         return out;

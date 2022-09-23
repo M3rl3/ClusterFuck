@@ -1,8 +1,10 @@
 #include "Vector3.h"
 
 //Default constructor
-Vector3::Vector3() {
-
+Vector3::Vector3() /*: Vector3(0.f)*/ {
+    this->x = 0.f;
+    this->y = 0.f;
+    this->z = 0.f;
 }
 
 //Parameterized constructor
@@ -10,7 +12,6 @@ Vector3::Vector3(float yes) /*: Vector3(yes, yes, yes)*/ {
     this->x = yes;
     this->y = yes;
     this->z = yes;
-
 }
 
 //Overloaded constructor
@@ -46,13 +47,13 @@ Vector3 Vector3::operator+(const Vector3 ass) {
 }
 
 //Subtraction Overload
-Vector3 Vector3::operator-(const Vector3& ass) {
+Vector3 Vector3::operator-(const Vector3 ass) {
 
     return Vector3(x - ass.x, y - ass.y, z - ass.z);
 }
 
 //Multiplication Overload
-Vector3 Vector3::operator*(const float ass) {
+Vector3 Vector3::operator*(float ass) {
     return Vector3(x * ass, y * ass, z * ass);
 }
 
@@ -72,6 +73,11 @@ std::ostream& operator<<(std::ostream& out, Vector3& v1) {
 //    y *= ass;
 //    z *= ass;
 //}
+
+//Adds current vector to a scaled vector
+void Vector3::scalevector(Vector3& ass, float scalar) {
+    *this = *this + ass * scalar;
+}
 
 //Vector Magnitude
 float Vector3::magnitude() {

@@ -11,13 +11,15 @@ public:
     Vector3(const Vector3&);
     Vector3 operator=(const Vector3);
     Vector3 operator+(const Vector3);
-    Vector3 operator-(const Vector3&);
-    Vector3 operator*(const float);
+    Vector3 operator-(const Vector3);
+    Vector3 operator*(float);
     Vector3 operator/(const float&);
+
+    
 
     friend std::ostream& operator<<(std::ostream&, Vector3&);
 
-    //void operator*=(float&);
+    void scalevector(Vector3&, float);
 
     void normal();
     float magnitude();
