@@ -24,6 +24,7 @@
     <ProjectGuid>{8da67f9e-6af3-4289-a17f-0fada8127561}</ProjectGuid>
     <RootNamespace>ClusterFuck</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>PhysicsEngine</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
